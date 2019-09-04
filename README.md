@@ -8,7 +8,9 @@ This Rmd shows how the function that makes the community plot is setup
 and gives an example of some tweaks that was made (and can be edited to
 change the plot).
 
-![](CommunityPlotExample_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+  - This plot is made by `/comm_assign_plot.R"`
+
+![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
 # Read in subject community matrix & add NodeID column
 
@@ -18,8 +20,8 @@ change the plot).
 <!-- end list -->
 
 ``` r
-c <- read.csv('./sample_sub_sorted_community_mode.txt', header=F)
-csum <- read.table("./parcel_community.txt", header=T, sep="\t")
+c <- read.csv('./data/sample_sub_sorted_community_mode.txt', header=F)
+csum <- read.table("./data/parcel_community.txt", header=T, sep="\t")
 
 csum[csum==0] <- 1
 
@@ -125,7 +127,7 @@ head(scc)
 <!-- end list -->
 
 ``` r
-syslabel <- read.csv("./systemlabel.txt")
+syslabel <- read.csv("./data/systemlabel.txt")
 head(syslabel)
 ```
 
@@ -190,7 +192,7 @@ g2 <- scc %>%
 grid.arrange(g1, g2, ncol=2)
 ```
 
-![](CommunityPlotExample_files/figure-gfm/basic_plot-1.png)<!-- -->
+![](README_files/figure-gfm/basic_plot-1.png)<!-- -->
 
 ## Add number of unique communities on top
 
@@ -243,7 +245,7 @@ g2 <- g2 +
 print(g2)
 ```
 
-![](CommunityPlotExample_files/figure-gfm/add_num-1.png)<!-- -->
+![](README_files/figure-gfm/add_num-1.png)<!-- -->
 
 ## Show color legend
 
@@ -260,4 +262,4 @@ g2 <- suppressMessages(g2 + scale_fill_manual(values = syscolor,
 print(g2)
 ```
 
-![](CommunityPlotExample_files/figure-gfm/add_legend-1.png)<!-- -->
+![](README_files/figure-gfm/add_legend-1.png)<!-- -->

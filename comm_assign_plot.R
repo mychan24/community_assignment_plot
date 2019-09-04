@@ -11,11 +11,17 @@
 # Ouput:    ggplot object
 #
 # Example Usage:
-
+#        comm %>%
+#          select(-par_id, -par_vertex) %>%
+#          comm_assign_plot(comm = .,
+#                           commlabel = commlabel,
+#                           ref_col = 'power_label',
+#                           col_order = c(rev(names(c)[3:7]), as.character(seq(.1,10,.1)), 'power_label'))
 # #########################################################################
+# myc, 2019/09/04 - add Example Usage
 # myc, UTD 2019/08/29- initial
 # #########################################################################
-commplot = function(comm, commlabel, ref_col, col_order, comm_info=TRUE, show_legend=TRUE) {
+comm_assign_plot = function(comm, commlabel, ref_col, col_order, comm_info=TRUE, show_legend=TRUE) {
   library(ggplot2)
   library(tidyverse)
 

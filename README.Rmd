@@ -11,11 +11,11 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(gridExtra)
 
-source("./commplot.R")
+source("./comm_assign_plot.R")
 
-subject_comm <- read.csv('./sample_sub_sorted_community_mode.txt', header=F)
-subject_sparse_mode <- read.table("./parcel_community.txt", header=T, sep="\t")
-syslabel <- read.csv("./systemlabel.txt")
+subject_comm <- read.csv('./data/sample_sub_sorted_community_mode.txt', header=F)
+subject_sparse_mode <- read.table("./data/parcel_community.txt", header=T, sep="\t")
+syslabel <- read.csv("./data/systemlabel.txt")
 
 subject_sparse_mode[subject_sparse_mode==0] <- 1 # Liang name unassign to 0, but it should be named as 1 for coloring
 colnames(subject_comm)[1:ncol(subject_comm)] <- seq(.1,10,.1) #  .1% to 10%
@@ -25,7 +25,7 @@ c <- cbind(subject_sparse_mode, subject_comm)
 
 g <- c %>% 
   select(-par_id, -par_vertex) %>%
-  commplot(comm = ., 
+  comm_assign_plot(comm = ., 
            commlabel = syslabel, 
            ref_col='10', 
            col_order = c(rev(names(c)[3:7]), as.character(seq(.1,9.9,.1)), '10'), 
@@ -37,7 +37,9 @@ g <- c %>%
 
 This Rmd shows how the function that makes the community plot is setup and gives an example of some tweaks that was made (and can be edited to change the plot). 
 
-```{r, echo=FALSE, fig.width=10, fig.height=6}
+* This plot is made by `/comm_assign_plot.R"`
+
+```{r, echo=FALSE, warning=F, message=F, fig.width=10, fig.height=6}
 print(g)
 ```
 
@@ -47,8 +49,8 @@ print(g)
 * This example has 100 columns of assignments, ordered from 0.1% to 10% edge density
 
 ```{r load subject}
-c <- read.csv('./sample_sub_sorted_community_mode.txt', header=F)
-csum <- read.table("./parcel_community.txt", header=T, sep="\t")
+c <- read.csv('./data/sample_sub_sorted_community_mode.txt', header=F)
+csum <- read.table("./data/parcel_community.txt", header=T, sep="\t")
 
 csum[csum==0] <- 1
 
@@ -121,7 +123,7 @@ head(scc)
 * This uses a systemlabel.txt file that already has information of how each community should be colored.
 
 ```{r}
-syslabel <- read.csv("./systemlabel.txt")
+syslabel <- read.csv("./data/systemlabel.txt")
 head(syslabel)
 ```
 
@@ -142,7 +144,7 @@ head(syscolor)
 
 * Used `scale_x_discrete(limits=rev(levels(scc$td)))` to flip x axis to have higher density on the left
 
-```{r basic_plot,  fig.width=20, fig.height=6}
+```{r basic_plot,fig.width=20, fig.height=6}
 g1 <- scc %>%
   ggplot(aes(x = td, y = par_id)) +
   geom_raster(aes(fill=CommID_reassigned)) +
