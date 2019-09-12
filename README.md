@@ -131,13 +131,13 @@ syslabel <- read.csv("./data/systemlabel.txt")
 head(syslabel)
 ```
 
-    ##   CommID   R   G   B     hex                       LabelName
-    ## 1      1 255 255 255 #ffffff                   u1_Unassigned
-    ## 2      2 128 128 128 #808080     u2_Ventral_frontal_temporal
-    ## 3      3 255   0   0 #ff0000                 a3_Default_mode
-    ## 4      4   0 255 255 #00ffff     a4_Hand_somatosensory-motor
-    ## 5      5   0   0 255 #0000ff                       a5_Visual
-    ## 6      6 245 245  15 #f5f50f a6_Fronto-parietal_task_control
+    ##   CommID   R   G   B     hex                       LabelName ShortName
+    ## 1      1 255 255 255 #ffffff                   u1_Unassigned    01_UNA
+    ## 2      2 128 128 128 #808080     u2_Ventral_frontal_temporal    02_VFT
+    ## 3      3 255   0   0 #ff0000                 a3_Default_mode    03_DMN
+    ## 4      4   0 255 255 #00ffff     a4_Hand_somatosensory-motor   04_HAND
+    ## 5      5   0   0 255 #0000ff                       a5_Visual    05_VIS
+    ## 6      6 245 245  15 #f5f50f a6_Fronto-parietal_task_control    06_FPN
 
   - A color palette `syscolor` is created to be feed into ggplot.
       - Note that the color for communities that don’t exist in this
